@@ -17,11 +17,16 @@
 
 #include "sq.h"
 
+#include <unistd.h>			/* for ioNumProcesors & sleep */
+
 #if COGMTVM
 
-#include <unistd.h>			/* for ioNumProcesors */
 #include <sys/types.h>		/* for ioNumProcesors */
-#include <sys/sysctl.h>		/* for ioNumProcesors */
+#if __linux__
+# include <linux/sysctl.h>		/* for ioNumProcesors */
+#else
+# include <sys/sysctl.h>		/* for ioNumProcesors */
+#endif
 #include <errno.h>
 #include <pthread.h>
 
